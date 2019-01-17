@@ -11,7 +11,7 @@ public class Main {
         System.out.println("スキップしますか？　1：スキップする　2：説明をきく");
         int num = scan.nextInt();
         scan.nextLine();
-        if(num == 2) {
+        if(num == 2){
             String text[] = {"ヌメロンは2人対戦ゲームでプレイヤーはそれぞれ相手に教えないで3桁の数字を決めます。",
                     "次に先攻後攻を決めて先攻から相手の決めた数字を予想し入力します。",
                     "そのあと予想した数字がどれだけ当たっているかのヒントをもらいます。",
@@ -55,18 +55,26 @@ public class Main {
 
 
         System.out.println("答え");
-        System.out.println(player.player_name[0] +":"+ player.player_number[0]);
-        System.out.println(player.player_name[1] +":"+ player.player_number[1]);
+        for(int i=0; i<2; i++){
+            System.out.print(player.player_name[i] +":");
+            for(int j=0; j<3; j++){
+                System.out.print(player.player_number[i][j]);
+            }
+            System.out.print("\n");
+        }
+//        System.out.print(player.player_name[0] +":"+ player.player_number[0]);
+//        System.out.println(player.player_name[1] +":"+ player.player_number[1]);
 
     }
     public static void conversion(Name_number player){
         String a = player.player_name[1];
         player.player_name[1] = player.player_name[0];
         player.player_name[0] = a;
-        int b = player.player_number[1];
+        int b[] = player.player_number[1];
         player.player_number[1] = player.player_number[0];
         player.player_number[0] = b;
     }
+
 
 
     public static void Judgment(Name_number player){
@@ -74,11 +82,10 @@ public class Main {
         int player_turn = 0, sw = 1, a = 0;
         int[] yosou = new int[100];
 
-        int[] player1 = new int[3], player2 = new int[3];
-        int[][] p_num = new int[2][3];
-        int p1_num = player.player_number[0], p2_num = player.player_number[1];
-        p_num[0] = contents(player1,p1_num);
-        p_num[1] = contents(player2,p2_num);
+//        int[] player1 = new int[3], player2 = new int[3];
+//        int[][] p_num = new int[2][3];
+//        p_num[0] = contents(player1,player.player_number[0]);
+//        p_num[1] = contents(player2,player.player_number[1]);
 
         while(game == false){
             Scanner scan = new Scanner(System.in);
@@ -91,14 +98,14 @@ public class Main {
             int[] data = new int[3];
             data = contents(data, number);
             for(int j=0; j<3; j++){
-                if(data[j] == p_num[sw][j]){
+                if(data[j] == player.player_number[sw][j]){
                     eat++;
                 }
             }
 
             for(int j=0; j<3; j++){
                 for(int n=0; n<3; n++) {
-                    if (data[j] == p_num[sw][n]) {
+                    if (data[j] == player.player_number[sw][n]) {
                         bite++;
                     }
                 }
@@ -122,6 +129,9 @@ public class Main {
             }
         }
     }
+
+
+
     public static int[] contents(int num[], int n){
         for(int i=2; i>=0; i--){
             int x = n % 10;
