@@ -15,7 +15,7 @@ public class Name_number {
             Scanner scan = new Scanner(System.in);
             int n = i+1;
             System.out.println("プレイヤー" + n + "の名前と3桁の数字を入力してください。");
-            System.out.println("名前：");
+            System.out.print("名前：");
             this.player_name[i] = scan.nextLine();
             while(miss == true) {
                 char[] c = console.readPassword("3桁の数字： ");
@@ -34,11 +34,51 @@ public class Name_number {
                     }
                 }
             }
-            //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         }
     }
 
-    public Name_number(int num, int num2) {
 
+
+    public void turn(){
+        System.out.println("先攻と後攻を決めてください。ランダムで決めますか？ 1：はい　2：いいえ");
+        Scanner scan = new Scanner(System.in);
+        int num = scan.nextInt();
+
+        if (num == 1) {
+            int order = (int) (Math.random() * 2);
+            if (order == 0) {
+                System.out.println(this.player_name[0] + "さんが先攻です。");
+            } else {
+                System.out.println(this.player_name[1] + "さんが先攻です。");
+                conversion();
+            }
+        } else {
+            System.out.println("どちらが先攻ですか？　 1：" + this.player_name[0] + "　2：" + this.player_name[1]);
+            num = scan.nextInt();
+            if (num == 2) {
+                conversion();
+            }
+        }
+    }
+
+
+    public void conversion() {
+        String a = this.player_name[1];
+        this.player_name[1] = this.player_name[0];
+        this.player_name[0] = a;
+        int b[] = this.player_number[1];
+        this.player_number[1] = this.player_number[0];
+        this.player_number[0] = b;
+    }
+
+    public void answer(){
+        System.out.println("答え");
+        for (int i = 0; i < 2; i++) {
+            System.out.print(this.player_name[i] + ":");
+            for (int j = 0; j < 3; j++) {
+                System.out.print(this.player_number[i][j]);
+            }
+            System.out.print("\n");
+        }
     }
 }
