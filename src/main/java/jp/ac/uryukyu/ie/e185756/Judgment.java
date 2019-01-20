@@ -27,35 +27,26 @@ public class Judgment {
 
     public static void Judge(Name_number player){
         boolean game = false;
-        int player_turn = 0, sw = 1, a = 0;
-        int[] yosou = new int[100];
+        int player_turn = 0, sw = 1;
 
         Scanner scan = new Scanner(System.in);
 
-//        int[] player1 = new int[3], player2 = new int[3];
-//        int[][] p_num = new int[2][3];
-//        p_num[0] = contents(player1,player.player_number[0]);
-//        p_num[1] = contents(player2,player.player_number[1]);
-
         while(game == false){
-//            Scanner scan = new Scanner(System.in);
             int eat = 0, bite = 0;
-            System.out.println(player.player_name[player_turn] + "さんのターンです。数字を入力してください。");
+            System.out.println(player.getPlayer_name()[player_turn] + "さんのターンです。数字を入力してください。");
             int number = scan.nextInt();
-            yosou[a] = number;
-            a++;
+
 
             int[] data = new int[3];
             data = contents(data, number);
             for(int j=0; j<3; j++){
-                if(data[j] == player.player_number[sw][j]){
+                if(data[j] == player.getPlayer_number()[sw][j]){
                     eat++;
                 }
             }
-
             for(int j=0; j<3; j++){
                 for(int n=0; n<3; n++) {
-                    if (data[j] == player.player_number[sw][n]) {
+                    if (data[j] == player.getPlayer_number()[sw][n]) {
                         bite++;
                     }
                 }
@@ -65,7 +56,7 @@ public class Judgment {
             System.out.println(eat + "EAT\t" + bite + "BITE");
 
             if(eat == 3){
-                System.out.println("対戦終了！" + player.player_name[player_turn] + "さんの勝利です！！！");
+                System.out.println("対戦終了！" + player.getPlayer_name()[player_turn] + "さんの勝利です！！！");
                 game = true;
             }
 

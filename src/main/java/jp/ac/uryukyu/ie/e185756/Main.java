@@ -10,7 +10,7 @@ public class Main {
 
         Judgment.Judge(player);
 
-        player.answer();
+        player.Answer();
     }
 }
 

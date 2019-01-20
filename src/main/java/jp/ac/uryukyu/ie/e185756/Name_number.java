@@ -5,8 +5,8 @@ import java.io.Console;
 
 public class Name_number {
 
-    String[] player_name = new String[2];
-    int[][] player_number = new int[2][3];
+    private String[] player_name = new String[2];
+    private int[][] player_number = new int[2][3];
 
     Name_number() {
         Console console = System.console();
@@ -38,7 +38,6 @@ public class Name_number {
     }
 
 
-
     public void turn(){
         System.out.println("先攻と後攻を決めてください。ランダムで決めますか？ 1：はい　2：いいえ");
         Scanner scan = new Scanner(System.in);
@@ -50,19 +49,19 @@ public class Name_number {
                 System.out.println(this.player_name[0] + "さんが先攻です。");
             } else {
                 System.out.println(this.player_name[1] + "さんが先攻です。");
-                conversion();
+                Conversion();
             }
         } else {
             System.out.println("どちらが先攻ですか？　 1：" + this.player_name[0] + "　2：" + this.player_name[1]);
             num = scan.nextInt();
             if (num == 2) {
-                conversion();
+                Conversion();
             }
         }
     }
 
 
-    public void conversion() {
+    public void Conversion() {
         String a = this.player_name[1];
         this.player_name[1] = this.player_name[0];
         this.player_name[0] = a;
@@ -71,7 +70,8 @@ public class Name_number {
         this.player_number[0] = b;
     }
 
-    public void answer(){
+
+    public void Answer(){
         System.out.println("答え");
         for (int i = 0; i < 2; i++) {
             System.out.print(this.player_name[i] + ":");
@@ -80,5 +80,14 @@ public class Name_number {
             }
             System.out.print("\n");
         }
+    }
+
+
+    public String[] getPlayer_name(){
+        return this.player_name;
+    }
+
+    public int[][] getPlayer_number(){
+        return this.player_number;
     }
 }
