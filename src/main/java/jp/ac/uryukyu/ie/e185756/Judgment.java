@@ -1,5 +1,6 @@
 package jp.ac.uryukyu.ie.e185756;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class Judgment {
@@ -12,9 +13,12 @@ public class Judgment {
         scan.nextLine();
         if (num == 2) {
             String text[] = {"ヌメロンは2人対戦ゲームでプレイヤーはそれぞれ相手に教えないで3桁の数字を決めます。",
+                    "その際同じ数字を使ってはいけません。",
                     "次に先攻後攻を決めて先攻から相手の決めた数字を予想し入力します。",
                     "そのあと予想した数字がどれだけ当たっているかのヒントをもらいます。",
-                    "これを交互に行い先に相手の数字を当てた人の勝ちです。"};
+                    "これを交互に行い先に相手の数字を当てた人の勝ちです。",
+                    "EATは予想した3桁の数字の場所と値が共に合っている数を表します。",
+                    "BITEは予想した3桁の数字の中で正解の3桁の数字に含まれているが場所が合っていない数を表します。"};
             for (int i = 0; i < text.length; i++) {
                 System.out.print(text[i]);
                 scan.nextLine();
@@ -22,6 +26,40 @@ public class Judgment {
         }
         System.out.println("それでは対戦を開始します！");
         scan.nextLine();
+    }
+
+
+    public static String[] Name_setting(int i,String[] player_name){
+        int n = i+1;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("プレイヤー" + n + "の名前と3桁の数字を入力してください。");
+        System.out.print("名前：");
+        player_name[i] = scan.nextLine();
+        return player_name;
+    }
+
+
+    public static int[][] Number_setting(int i,int[][] player_number) {
+        Console console = System.console();
+        boolean miss = true;
+        while(miss == true) {
+            char[] c = console.readPassword("3桁の数字： ");
+            if (c.length != 3) {
+                System.out.println("入力された数字が3桁ではありません。");
+            }
+            else {
+                for (int j = 0; j < 3; j++) {
+                    player_number[i][j] += Character.getNumericValue(c[j]);
+                }
+                if ((player_number[i][0] == player_number[i][1]) && (player_number[i][0] == player_number[i][2]) && (player_number[i][1] == player_number[i][2])) {
+                    System.out.println("同じ数字が入力されています。");
+                }
+                else {
+                    miss = false;
+                }
+            }
+        }
+        return player_number;
     }
 
 
@@ -36,9 +74,9 @@ public class Judgment {
             System.out.println(player.getPlayer_name()[player_turn] + "さんのターンです。数字を入力してください。");
             int number = scan.nextInt();
 
-
             int[] data = new int[3];
             data = contents(data, number);
+
             for(int j=0; j<3; j++){
                 if(data[j] == player.getPlayer_number()[sw][j]){
                     eat++;
