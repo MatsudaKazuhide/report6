@@ -66,11 +66,11 @@ public class Judgment {
                 for (int j = 0; j < 3; j++) {
                     player_number[i][j] += Character.getNumericValue(c[j]);
                 }
-                if ((player_number[i][0] == player_number[i][1]) && (player_number[i][0] == player_number[i][2]) && (player_number[i][1] == player_number[i][2])) {
-                    System.out.println("同じ数字が入力されています。");
+                if ((player_number[i][0] != player_number[i][1]) && (player_number[i][0] != player_number[i][2]) && (player_number[i][1] != player_number[i][2])) {
+                    miss = false;
                 }
                 else {
-                    miss = false;
+                    System.out.println("同じ数字が入力されています。");
                 }
             }
         }
@@ -92,15 +92,12 @@ public class Judgment {
             System.out.println(player.getPlayer_name()[player_turn] + "さんのターンです。数字を入力してください。");
             int number = scan.nextInt();
 
-            int[] data = new int[3];
-            data = contents(data, number);
+            int[] data = contents(number);
 
             for(int j=0; j<3; j++){
                 if(data[j] == player.getPlayer_number()[sw][j]){
                     eat++;
                 }
-            }
-            for(int j=0; j<3; j++){
                 for(int n=0; n<3; n++) {
                     if (data[j] == player.getPlayer_number()[sw][n]) {
                         bite++;
@@ -131,11 +128,11 @@ public class Judgment {
 
     /**
      * 3桁の数字をint型の配列に直すメソッド。
-     * @param num 直したあとの数字。
      * @param n 直す前の数字。
      * @return num 直したあとの数字。
      */
-    public static int[] contents(int num[], int n){
+    public static int[] contents(int n){
+        int[] num = new int[3];
         for(int i=2; i>=0; i--){
             int x = n % 10;
             num[i]=x;
