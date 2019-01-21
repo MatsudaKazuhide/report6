@@ -3,8 +3,13 @@ package jp.ac.uryukyu.ie.e185756;
 import java.io.Console;
 import java.util.Scanner;
 
+/**
+ * Judgmentクラス。
+ */
 public class Judgment {
-
+    /**
+     * 最初のヌメロンのルール説明をするメソッド。
+     */
     public static void op(){
         Scanner scan = new Scanner(System.in);
         System.out.println("これからヌメロンのルール説明をします。");
@@ -28,7 +33,12 @@ public class Judgment {
         scan.nextLine();
     }
 
-
+    /**
+     * プレイヤーの名前をつけるメソッド。
+     * @param i プレイヤーの番号。
+     * @param player_name プレイヤーの名前。
+     * @return player_name プレイヤーの名前。
+     */
     public static String[] Name_setting(int i,String[] player_name){
         int n = i+1;
         Scanner scan = new Scanner(System.in);
@@ -38,7 +48,12 @@ public class Judgment {
         return player_name;
     }
 
-
+    /**
+     * プレイヤーがセットする番号をつけるメソッド。
+     * @param i プレイヤーの番号。
+     * @param player_number プレイヤーがセットした番号。
+     * @return player_number プレイヤーがセットした番号。
+     */
     public static int[][] Number_setting(int i,int[][] player_number) {
         Console console = System.console();
         boolean miss = true;
@@ -62,7 +77,10 @@ public class Judgment {
         return player_number;
     }
 
-
+    /**
+     * 予想した数字を判定するメソッド。
+     * @param player Name_number。
+     */
     public static void Judge(Name_number player){
         boolean game = false;
         int player_turn = 0, sw = 1;
@@ -110,6 +128,13 @@ public class Judgment {
             scan.nextLine();
         }
     }
+
+    /**
+     * 3桁の数字をint型の配列に直すメソッド。
+     * @param num 直したあとの数字。
+     * @param n 直す前の数字。
+     * @return num 直したあとの数字。
+     */
     public static int[] contents(int num[], int n){
         for(int i=2; i>=0; i--){
             int x = n % 10;
