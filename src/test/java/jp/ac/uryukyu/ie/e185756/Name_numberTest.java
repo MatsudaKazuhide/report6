@@ -25,5 +25,4 @@ class Name_numberTest {
         assertEquals(name,player.getPlayer_name());
         assertEquals(number,player.getPlayer_number());
     }
-
 }
